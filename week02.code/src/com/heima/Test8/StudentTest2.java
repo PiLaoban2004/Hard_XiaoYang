@@ -1,0 +1,57 @@
+package com.heima.Test8;
+
+import com.heima.Test7.Student;
+/*要求5：查询数组id为“2”的学生，如果存在，则将他的年龄+1岁*/
+public class StudentTest2 {
+    public static void main(String[] args) {
+        //1.创建一个长度为3的Student数组
+        Student[] arr = new Student[3];
+
+        //2.创建三个学生对象，并赋值给数组中的元素
+        Student stu1 = new Student(1, "zhangsan", 18);
+        Student stu2 = new Student(2, "lisi", 20);
+        Student stu3 = new Student(3, "wangwu", 19);
+
+        //3.将学生对象添加到数组中
+        arr[0] = stu1;
+        arr[1] = stu2;
+        arr[2] = stu3;
+        //要求5：查询数组id为“2”的学生，如果存在，则将他的年龄+1岁
+        int index = getIndex(arr, 1);
+        if (index>=0){
+            Student stu=arr[index];
+            int newAge = stu.getAge() + 1;
+            //修改年龄
+            stu.setAge(newAge);
+            printArr(arr);
+        }else {
+            System.out.println("不存在");
+        }
+    }
+
+    public static void printArr(Student[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            Student stu = arr[i];
+            if (stu != null) {
+                System.out.println(stu.getId() + "," + stu.getName() + "," + stu.getAge());
+
+            }
+        }
+    }
+
+    public static int getIndex(Student[] arr, int id) {
+        for (int i = 0; i < arr.length; i++) {
+            //依次得到每一个学生对象
+            Student stu = arr[i];
+            //非空判断
+            if (stu != null) {
+                int sid = stu.getId();
+                if (sid == id) {
+                    return i;
+                }
+            }
+        }
+        //当循环结束之后，还没找到就不存在
+        return -1;
+    }
+}
